@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jaehyun Lee</title>
+<meta name="description" content="Jaehyun Lee is a PhD student in Computer Science at North Carolina State University, advised by Prof. Yuan Liu, working on quantum algorithms for CV-DV processors.">
+<meta property="og:title" content="Jaehyun Lee">
+<meta property="og:description" content="PhD student in Computer Science at North Carolina State University researching quantum algorithms for CV-DV processors.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://jaehyunslee.github.io/">
+<meta name="twitter:card" content="summary">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<script>
+/* ==============================================================
+   EVERYTHING YOU EDIT LIVES IN THIS BLOCK.
+   ============================================================== */
+
+const ME = "J. Lee";   // must match the spelling used inside `authors`; gets bolded
+
+const SITE = {
+  name:        "Jaehyun Lee",
+  tagline:     "Quantum algorithms for hybrid CV-DV processors",
+  affiliation: "PhD Student, Computer Science",
+  university:  "North Carolina State University",
+  office:      "Raleigh, NC",
+  email:       "leejh2017tob1932@gmail.com",
+  photo:       "profile.jpg",     // drop the file next to index.html; falls back to initials
+  links: {
+    "CV":             "cv.pdf",
+    "Google Scholar": "https://scholar.google.com/citations?hl=en&user=RRsQ8ekAAAAJ",
+    "GitHub":         "https://github.com/JaehyunsLee",
+    "LinkedIn":       "https://www.linkedin.com/in/jaehyun-lee-455b101a3/"
+  }
+};
+
+/* Bio. One string per paragraph. Raw HTML is allowed. */
+const BIO = [
+  `I am a PhD student in Computer Science at <a href="https://www.ncsu.edu/">North Carolina State University</a>, advised by Prof. Yuan Liu. My thesis work is on quantum algorithms for continuous-variable / discrete-variable (CV-DV) processors — algorithms written for the native gate set of hybrid hardware from the start, rather than translated onto it after the fact.`,
+  `The through-line in what I work on is the gap between an algorithm on paper and an algorithm that survives contact with a device: how optimization and molecular-simulation problems should be encoded, how classical data enters a quantum state, and how workloads get scheduled once a single chip is no longer enough.`,
+  `Before starting the PhD I spent close to four years as a research data scientist at Cleveland Clinic, building NLP and graph-learning systems for a national cardiac surgery registry, and worked at JPMorgan Chase on agentic LLM workflows for commercial banking. I hold an MS and a BS from Case Western Reserve University, where my master's work on quantum convolutional neural networks was advised by Prof. Shuai Xu.`
+];
+
+/* Research threads. */
+const RESEARCH = [
+  {
+    title: "Quantum algorithms for CV-DV processors",
+    body:  `Hybrid hardware exposes bosonic modes alongside qubits, and the two carry information very differently. I design optimization and molecular-simulation algorithms that map natively onto that structure, with the goal of a real margin over classical methods rather than parity.`
+  },
+  {
+    title: "Compilation and scheduling across modular QPUs",
+    body:  `Scaling past a single chip means moving state over classical and quantum links whose costs differ by orders of magnitude. With collaborators I work on transpiling OpenQASM 3.0 dynamic circuits to CUDA-Q, and on communication-aware schedulers that place workloads across interconnected QPUs.`
+  },
+  {
+    title: "Quantum machine learning and data embeddings",
+    body:  `How classical data enters a quantum state decides the trainability and expressivity of everything downstream. I am interested in embeddings that preserve the structure that matters without spending the entire circuit-depth budget getting the data in.`
+  },
+  {
+    title: "Machine learning for clinical data",
+    body:  `Earlier work, still ongoing through collaborations: language models and knowledge graphs for automated abstraction from cardiac surgery registries, and multimodal representation learning on cardiovascular imaging.`
+  }
+];
+
+/* News. Newest first. First five show; the rest collapse behind a toggle. */
+const NEWS = [
+  { date: "Sep 2026", text: `<b>MOSAIQ</b> submitted to HiPC 2026.` },
+  { date: "Aug 2026", text: `Started my PhD in Computer Science at NC State, advised by Prof. Yuan Liu.` },
+  { date: "2026",     text: `<b>InterQ</b> accepted at IEEE QCE 2026.` },
+  { date: "2026",     text: `Paper on transpiling OpenQASM 3.0 dynamic circuits to CUDA-Q accepted at QCNC 2026.` },
+  { date: "2025",     text: `Co-authored paper on caval translocation published in <i>JTCVS Techniques</i>.` },
+  { date: "2024",     text: `Work on automated surgical procedure extraction published in <i>JAMIA</i>.` },
+  { date: "2022",     text: `Earned the IBM Qiskit Associate Developer certification.` }
+];
+
+/* Publications.
+   type:     "journal" | "conference" | "workshop" | "preprint" | "submitted"
+   abbr:     the badge in the left column
+   selected: shows under the "Selected" filter
+   links:    arxiv / pdf / code / doi / slides / poster / video                   */
+const PUBS = [
+  {
+    title: "MOSAIQ: Modality-Optimized Scheduling Across Interconnected QPUs",
+    authors: ["V. Kulkarni", "J. Lee", "et al."],
+    venue: "Submitted to IEEE International Conference on High Performance Computing, Data, and Analytics (HiPC)",
+    abbr: "HiPC", year: 2026, type: "submitted", selected: true,
+    key: "kulkarni2026mosaiq",
+    links: {}
+  },
+  {
+    title: "InterQ: Communication-Aware Scheduling Across Modular QPUs with Classical and Quantum Links",
+    authors: ["V. Kulkarni", "J. Lee", "et al."],
+    venue: "IEEE International Conference on Quantum Computing and Engineering (QCE)",
+    abbr: "QCE", year: 2026, type: "conference", selected: true,
+    key: "kulkarni2026interq",
+    note: "Accepted",
+    links: {}
+  },
+  {
+    title: "Efficient Transpilation of OpenQASM 3.0 Dynamic Circuits to CUDA-Q: Performance and Expressive Advantages",
+    authors: ["V. Kulkarni", "J. Lee", "et al."],
+    venue: "International Conference on Quantum Communications, Networking, and Computing (QCNC)",
+    abbr: "QCNC", year: 2026, type: "conference", selected: true,
+    key: "kulkarni2026transpilation",
+    note: "Accepted",
+    links: {}
+  },
+  {
+    title: "Caval Translocation as a Surgical Strategy for Congenital Heart Disease Patients with Bilateral Superior Vena Cava",
+    authors: ["H. K. Najm", "S. M. Hoenig", "J. Robinson", "R. Mahboubi", "K. Farahi",
+              "J. P. Costello III", "M. Ahmad", "B. A. Potz", "J. Lee", "T. Karamlou"],
+    venue: "JTCVS Techniques, 34:148–160",
+    abbr: "JTCVS", year: 2025, type: "journal", selected: false,
+    key: "najm2025caval",
+    links: {}
+  },
+  {
+    title: "Automating Surgical Procedure Extraction for Society of Thoracic Surgeons Adult Cardiac Surgery Registry Using Pretrained Language Models",
+    authors: ["J. Lee", "et al."],
+    venue: "Journal of the American Medical Informatics Association (JAMIA)",
+    abbr: "JAMIA", year: 2024, type: "journal", selected: true,
+    key: "lee2024automating",
+    links: {}
+  },
+  {
+    title: "Multimodal Representation Learning of Cardiovascular Magnetic Resonance Imaging",
+    authors: ["J. Qiu", "P. Huang", "M. Nakashima", "J. Lee", "et al."],
+    venue: "International Conference on Machine Learning (ICML) Workshop",
+    abbr: "ICML-W", year: 2023, type: "workshop", selected: false,
+    key: "qiu2023multimodal",
+    links: {}
+  }
+];
+
+const UPDATED = "September 2026";
+</script>
+
+<style>
+:root{
+  --paper:#ECECF0;
+  --card:#F7F7FA;
+  --ink:#14162A;
+  --body:#282B40;
+  --muted:#585C72;
+  --wire:#C3C2CE;
+  --accent:#3B2FC4;
+  --accent-soft:rgba(59,47,196,.09);
+
+  --serif:"Newsreader", Charter, Georgia, serif;
+  --sans:"IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --col:min(760px, 100% - 3rem);
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:5rem}
+body{
+  margin:0;background:var(--paper);color:var(--body);
+  font-family:var(--sans);font-size:16px;line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{font-family:var(--serif);font-weight:400;color:var(--ink);letter-spacing:-.01em}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+.wrap{width:var(--col);margin-inline:auto}
+
+/* ---------- top navigation ---------- */
+.topbar{
+  position:sticky;top:0;z-index:20;
+  background:rgba(236,236,240,.92);
+  backdrop-filter:saturate(180%) blur(8px);
+  border-bottom:1px solid var(--wire);
+}
+.topbar .wrap{display:flex;align-items:center;gap:1.5rem;height:3.75rem}
+.brand{font-family:var(--serif);font-size:1.05rem;color:var(--ink);text-decoration:none;margin-right:auto}
+.nav{display:flex;gap:1.4rem;font-size:.9rem}
+.nav a{position:relative;color:var(--muted);text-decoration:none;padding:.15rem 0}
+.nav a:hover{color:var(--ink)}
+.nav a[aria-current="true"]{color:var(--ink)}
+/* active marker is a gate box — the one bit of quantum vernacular kept */
+.nav a[aria-current="true"]::after{
+  content:"";position:absolute;left:50%;bottom:-.45rem;
+  width:7px;height:7px;margin-left:-3.5px;
+  background:var(--accent);transform:rotate(45deg);
+}
+
+/* ---------- header ---------- */
+header.hero{padding:4rem 0 0}
+.hero-grid{display:flex;gap:2.5rem;align-items:flex-start}
+.hero-text{flex:1;min-width:0}
+h1{font-size:clamp(2.2rem,5.5vw,3rem);font-weight:300;line-height:1.05;margin:0 0 .5rem}
+.tagline{
+  font-family:var(--serif);font-size:1.08rem;color:var(--muted);
+  margin:0 0 1.25rem;padding-left:.85rem;border-left:2px solid var(--accent);
+}
+.meta{font-size:.9rem;color:var(--muted);margin:0}
+.meta span{display:block}
+.meta a{color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft)}
+.meta a:hover{border-bottom-color:var(--accent)}
+
+.portrait{flex:none;width:168px;margin:0}
+.portrait img,.portrait .initials{
+  width:168px;height:168px;border-radius:50%;object-fit:cover;display:block;
+  border:1px solid var(--wire);
+}
+.portrait .initials{
+  display:flex;align-items:center;justify-content:center;
+  background:var(--card);color:var(--wire);
+  font-family:var(--serif);font-size:2.6rem;
+}
+
+.social{display:flex;flex-wrap:wrap;gap:1.1rem;font-size:.88rem;margin-top:1.5rem}
+.social a{color:var(--muted);text-decoration:none;border-bottom:1px solid var(--wire)}
+.social a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+
+/* ---------- sections ---------- */
+section{padding:3.5rem 0 0}
+h2{
+  font-size:1.3rem;margin:0 0 1.5rem;padding-bottom:.55rem;
+  border-bottom:1px solid var(--wire);
+}
+.bio{margin-top:2rem}
+.bio p{margin:0 0 1rem;max-width:66ch}
+.bio p:last-child{margin-bottom:0}
+
+/* research threads */
+.thread{padding:1.3rem 0;border-top:1px solid rgba(195,194,206,.6);max-width:66ch}
+.thread:first-child{border-top:0;padding-top:0}
+.thread h3{font-size:1.05rem;margin:0 0 .35rem}
+.thread p{margin:0;font-size:.94rem;color:var(--muted)}
+
+/* news */
+.news{margin:0;display:grid;grid-template-columns:6.5rem 1fr;gap:.75rem 1rem;font-size:.93rem}
+.news dt{font-family:var(--mono);font-size:.78rem;color:var(--muted);padding-top:.22rem}
+.news dd{margin:0}
+.news dd b{font-weight:600;color:var(--ink)}
+.news-hidden{display:none}
+.toggle-more{
+  margin-top:1.25rem;background:none;border:0;padding:0;cursor:pointer;
+  font-family:var(--sans);font-size:.85rem;color:var(--accent);
+  border-bottom:1px solid var(--accent-soft);
+}
+.toggle-more:hover{border-bottom-color:var(--accent)}
+
+/* filters */
+.filters{display:flex;flex-wrap:wrap;gap:1.2rem;margin:-.4rem 0 1.75rem}
+.filter{
+  background:none;border:0;padding:0 0 .2rem;cursor:pointer;
+  font-family:var(--sans);font-size:.85rem;color:var(--muted);
+  border-bottom:1px solid transparent;
+}
+.filter:hover{color:var(--ink)}
+.filter[aria-pressed="true"]{color:var(--accent);border-bottom-color:var(--accent)}
+
+/* publications */
+.year-head{font-family:var(--mono);font-size:.8rem;font-weight:500;color:var(--muted);margin:2rem 0 .9rem}
+.year-head:first-of-type{margin-top:0}
+.pub{
+  display:grid;grid-template-columns:4.75rem 1fr;gap:0 1.25rem;
+  padding:1.15rem 0;border-top:1px solid rgba(195,194,206,.6);
+}
+.abbr{
+  align-self:start;margin-top:.2rem;
+  display:flex;align-items:center;justify-content:center;
+  min-height:2.4rem;padding:.35rem .3rem;
+  border:1px solid var(--accent);color:var(--accent);
+  background:var(--accent-soft);
+  font-family:var(--mono);font-size:.72rem;line-height:1.2;text-align:center;
+  word-break:break-word;
+}
+.pub-title{font-family:var(--serif);font-size:1.08rem;line-height:1.35;margin:0 0 .25rem;color:var(--ink)}
+.pub-authors{font-size:.88rem;color:var(--muted);margin:0 0 .1rem}
+.pub-authors b{font-weight:600;color:var(--ink)}
+.more-authors{
+  background:none;border:0;padding:0;cursor:pointer;
+  font:inherit;color:var(--accent);text-decoration:underline;text-underline-offset:2px;
+}
+.pub-venue{font-size:.85rem;font-style:italic;color:var(--muted);margin:0}
+.pub-note{
+  display:inline-block;margin-left:.4rem;padding:.05rem .35rem;
+  font-family:var(--sans);font-style:normal;font-size:.7rem;
+  color:var(--accent);border:1px solid var(--accent-soft);background:var(--accent-soft);
+}
+.pub-links{display:flex;flex-wrap:wrap;gap:.55rem;margin-top:.6rem}
+.pub-links a,.pub-links button{
+  font-family:var(--sans);font-size:.75rem;line-height:1;
+  padding:.32rem .55rem;cursor:pointer;text-decoration:none;
+  color:var(--accent);background:transparent;
+  border:1px solid var(--wire);border-radius:2px;
+}
+.pub-links a:hover,.pub-links button:hover{border-color:var(--accent);background:var(--accent-soft)}
+.bib{
+  margin:.7rem 0 0;padding:.85rem 1rem;background:var(--card);
+  border:1px solid var(--wire);border-left:2px solid var(--accent);
+  font-family:var(--mono);font-size:.74rem;line-height:1.55;
+  white-space:pre-wrap;word-break:break-word;color:var(--body);
+}
+.bib[hidden]{display:none}
+.copy-bib{
+  display:block;margin-top:.6rem;background:none;border:0;padding:0;cursor:pointer;
+  font-family:var(--sans);font-size:.75rem;color:var(--accent);
+}
+.empty{color:var(--muted);font-size:.9rem;padding:1rem 0}
+
+footer{margin-top:4.5rem;padding:1.75rem 0 3rem;border-top:1px solid var(--wire);font-size:.8rem;color:var(--muted)}
+
+/* ---------- responsive ---------- */
+@media (max-width:640px){
+  .hero-grid{flex-direction:column-reverse;gap:1.5rem}
+  .portrait{width:120px;align-self:flex-start}
+  .portrait img,.portrait .initials{width:120px;height:120px}
+  header.hero{padding-top:2.25rem}
+  .nav{gap:1rem;font-size:.85rem}
+  .brand{display:none}
+  .topbar .wrap{justify-content:space-between}
+  .news{grid-template-columns:1fr;gap:.15rem}
+  .news dd{margin-bottom:.75rem}
+  .pub{grid-template-columns:1fr;gap:.6rem}
+  .abbr{width:max-content;min-height:0;padding:.25rem .5rem}
+}
+
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+
+@media print{
+  .topbar,.filters,.pub-links,.social,footer{display:none}
+  body{background:#fff;font-size:10.5pt}
+  .pub{break-inside:avoid}
+}
+</style>
+</head>
+
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <a class="brand" href="#top" id="brand"></a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#top" data-section="top">About</a>
+      <a href="#research" data-section="research">Research</a>
+      <a href="#news" data-section="news">News</a>
+      <a href="#publications" data-section="publications">Publications</a>
+      <a id="cvLink" href="cv.pdf">CV</a>
+    </nav>
+  </div>
+</div>
+
+<header class="hero wrap" id="top">
+  <div class="hero-grid">
+    <div class="hero-text">
+      <h1 id="name"></h1>
+      <p class="tagline" id="tagline"></p>
+      <p class="meta" id="meta"></p>
+    </div>
+    <figure class="portrait" id="portrait"></figure>
+  </div>
+
+  <div class="bio" id="bio"></div>
+  <div class="social" id="social"></div>
+</header>
+
+<main>
+  <section class="wrap" id="research">
+    <h2>Research</h2>
+    <div id="threads"></div>
+  </section>
+
+  <section class="wrap" id="news">
+    <h2>News</h2>
+    <dl class="news" id="newsList"></dl>
+    <button class="toggle-more" id="newsToggle" type="button" hidden>Show earlier news</button>
+  </section>
+
+  <section class="wrap" id="publications">
+    <h2>Publications</h2>
+    <div class="filters" id="filters" role="group" aria-label="Filter publications"></div>
+    <div id="pubs"></div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>© <span id="year"></span> <span id="footName"></span>. Last updated <span id="updated"></span>.</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  const $  = (id) => document.getElementById(id);
+  const el = (tag, cls, text) => {
+    const n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
+    return n;
+  };
+
+  /* ---------- identity ---------- */
+  document.title = SITE.name;
+  $("name").textContent     = SITE.name;
+  $("tagline").textContent  = SITE.tagline;
+  $("brand").textContent    = SITE.name;
+  $("footName").textContent = SITE.name;
+  $("updated").textContent  = UPDATED;
+  $("year").textContent     = new Date().getFullYear();
+  if (SITE.links.CV) $("cvLink").href = SITE.links.CV;
+
+  const meta = $("meta");
+  [SITE.affiliation, SITE.university, SITE.office].filter(Boolean)
+    .forEach((line) => meta.appendChild(el("span", null, line)));
+  const mailLine = el("span");
+  const mailA = el("a", null, SITE.email);
+  mailA.href = "mailto:" + SITE.email;
+  mailLine.appendChild(mailA);
+  meta.appendChild(mailLine);
+
+  /* portrait, with an initials fallback if the image is missing */
+  const initials = SITE.name.split(/\s+/).map((w) => w[0]).join("").slice(0, 2).toUpperCase();
+  const fig = $("portrait");
+  if (SITE.photo) {
+    const img = document.createElement("img");
+    img.src = SITE.photo;
+    img.alt = SITE.name;
+    img.addEventListener("error", () => img.replaceWith(el("div", "initials", initials)));
+    fig.appendChild(img);
+  } else {
+    fig.appendChild(el("div", "initials", initials));
+  }
+
+  $("bio").innerHTML = BIO.map((p) => "<p>" + p + "</p>").join("");
+
+  const social = $("social");
+  Object.entries(SITE.links).forEach(([label, href]) => {
+    const a = el("a", null, label);
+    a.href = href;
+    if (/^https?:/.test(href)) { a.rel = "me noopener"; a.target = "_blank"; }
+    social.appendChild(a);
+  });
+
+  /* ---------- research ---------- */
+  const threads = $("threads");
+  RESEARCH.forEach((r) => {
+    const d = el("div", "thread");
+    d.appendChild(el("h3", null, r.title));
+    const p = el("p");
+    p.innerHTML = r.body;
+    d.appendChild(p);
+    threads.appendChild(d);
+  });
+
+  /* ---------- news ---------- */
+  const VISIBLE_NEWS = 5;
+  const newsList = $("newsList");
+  NEWS.forEach((n, i) => {
+    const dt = el("dt", null, n.date);
+    const dd = el("dd");
+    dd.innerHTML = n.text;
+    if (i >= VISIBLE_NEWS) { dt.classList.add("news-hidden"); dd.classList.add("news-hidden"); }
+    newsList.append(dt, dd);
+  });
+
+  if (NEWS.length > VISIBLE_NEWS) {
+    const btn = $("newsToggle");
+    btn.hidden = false;
+    let open = false;
+    btn.addEventListener("click", () => {
+      open = !open;
+      newsList.querySelectorAll("dt, dd").forEach((n, i) => {
+        if (Math.floor(i / 2) >= VISIBLE_NEWS) n.classList.toggle("news-hidden", !open);
+      });
+      btn.textContent = open ? "Show less" : "Show earlier news";
+    });
+  }
+
+  /* ---------- bibtex ---------- */
+  const ENTRY_TYPE = {
+    journal: "article", conference: "inproceedings",
+    workshop: "inproceedings", preprint: "misc", submitted: "misc"
+  };
+
+  function toBibtex(p) {
+    if (p.bibtex) return p.bibtex.trim();
+    const type  = ENTRY_TYPE[p.type] || "misc";
+    const field = p.type === "journal" ? "journal"
+                : (p.type === "preprint" || p.type === "submitted") ? "howpublished"
+                : "booktitle";
+    const key   = p.key || (p.authors[0].split(/[.\s]+/).pop().toLowerCase() + p.year);
+    const rows  = [
+      ["title",  p.title],
+      ["author", p.authors.filter((a) => a !== "et al.").join(" and ")],
+      [field,    p.venue],
+      ["year",   String(p.year)]
+    ];
+    if (p.links && p.links.doi) rows.push(["doi", p.links.doi.replace(/^https?:\/\/(dx\.)?doi\.org\//, "")]);
+    return "@" + type + "{" + key + ",\n" +
+      rows.map(([k, v]) => "  " + k.padEnd(9) + " = {" + v + "}").join(",\n") +
+      "\n}";
+  }
+
+  /* ---------- publications ---------- */
+  const LINK_LABELS = { arxiv: "arXiv", pdf: "PDF", code: "Code", doi: "DOI", slides: "Slides", poster: "Poster", video: "Video" };
+  const FILTERS = [
+    { key: "all",        label: "All" },
+    { key: "selected",   label: "Selected" },
+    { key: "journal",    label: "Journal" },
+    { key: "conference", label: "Conference" },
+    { key: "workshop",   label: "Workshop" },
+    { key: "preprint",   label: "Preprint" },
+    { key: "submitted",  label: "Under review" }
+  ];
+  const AUTHOR_CAP = 3;
+  let active = "selected";
+
+  const matches = (p) =>
+    active === "all" ? true : active === "selected" ? !!p.selected : p.type === active;
+
+  function authorLine(p) {
+    const line = el("p", "pub-authors");
+
+    const paint = (list, truncated) => {
+      line.textContent = "";
+      list.forEach((a, i) => {
+        if (i) line.append(document.createTextNode(", "));
+        line.append(a === ME ? el("b", null, a) : document.createTextNode(a));
+      });
+      if (truncated) {
+        const hidden = p.authors.length - AUTHOR_CAP;
+        const btn = el("button", "more-authors",
+          "and " + hidden + " more author" + (hidden > 1 ? "s" : ""));
+        btn.type = "button";
+        btn.addEventListener("click", () => paint(p.authors, false));
+        line.append(document.createTextNode(", "), btn);
+      }
+    };
+
+    // never hide ME behind the truncation
+    const buried = p.authors.indexOf(ME) >= AUTHOR_CAP;
+    const cut = p.authors.length > AUTHOR_CAP && !buried;
+    paint(cut ? p.authors.slice(0, AUTHOR_CAP) : p.authors, cut);
+    return line;
+  }
+
+  function pubNode(p) {
+    const row = el("div", "pub");
+    row.appendChild(el("div", "abbr", p.abbr || String(p.year)));
+
+    const body = el("div");
+    body.appendChild(el("h3", "pub-title", p.title));
+    body.appendChild(authorLine(p));
+
+    const venue = el("p", "pub-venue", p.venue + ", " + p.year);
+    if (p.note) venue.appendChild(el("span", "pub-note", p.note));
+    body.appendChild(venue);
+
+    const bar = el("div", "pub-links");
+    Object.entries(p.links || {}).forEach(([kind, href]) => {
+      const a = el("a", null, LINK_LABELS[kind] || kind);
+      a.href = href;
+      a.rel = "noopener";
+      if (/^https?:/.test(href)) a.target = "_blank";
+      bar.appendChild(a);
+    });
+
+    const bib = el("pre", "bib", toBibtex(p));
+    bib.hidden = true;
+
+    const bibBtn = el("button", null, "BibTeX");
+    bibBtn.type = "button";
+    bibBtn.setAttribute("aria-expanded", "false");
+    bibBtn.addEventListener("click", () => {
+      bib.hidden = !bib.hidden;
+      bibBtn.setAttribute("aria-expanded", String(!bib.hidden));
+    });
+    bar.appendChild(bibBtn);
+
+    const copy = el("button", "copy-bib", "Copy to clipboard");
+    copy.type = "button";
+    copy.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(bib.firstChild.textContent);
+        copy.textContent = "Copied";
+      } catch {
+        copy.textContent = "Press ⌘/Ctrl+C to copy";
+        const r = document.createRange();
+        r.selectNode(bib.firstChild);
+        const s = getSelection(); s.removeAllRanges(); s.addRange(r);
+      }
+      setTimeout(() => (copy.textContent = "Copy to clipboard"), 2000);
+    });
+    bib.appendChild(copy);
+
+    body.append(bar, bib);
+    row.appendChild(body);
+    return row;
+  }
+
+  function renderPubs() {
+    const host = $("pubs");
+    host.textContent = "";
+
+    const shown = PUBS.filter(matches);
+    if (!shown.length) {
+      host.appendChild(el("p", "empty", "Nothing here yet."));
+      return;
+    }
+
+    [...new Set(shown.map((p) => p.year))]
+      .sort((a, b) => b - a)
+      .forEach((year) => {
+        host.appendChild(el("h3", "year-head", String(year)));
+        shown.filter((p) => p.year === year).forEach((p) => host.appendChild(pubNode(p)));
+      });
+  }
+
+  const filterBar = $("filters");
+  FILTERS.forEach((f) => {
+    const any = f.key === "all" ||
+      PUBS.some((p) => (f.key === "selected" ? p.selected : p.type === f.key));
+    if (!any) return;                               // hide filters that would come back empty
+    const b = el("button", "filter", f.label);
+    b.type = "button";
+    b.setAttribute("aria-pressed", String(f.key === active));
+    b.addEventListener("click", () => {
+      active = f.key;
+      filterBar.querySelectorAll(".filter").forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+      renderPubs();
+    });
+    filterBar.appendChild(b);
+  });
+
+  if (!PUBS.some((p) => p.selected)) active = "all";
+  renderPubs();
+
+  /* ---------- nav follows scroll ---------- */
+  const navLinks = [...document.querySelectorAll(".nav a[data-section]")];
+  const setCurrent = (id) =>
+    navLinks.forEach((a) => a.setAttribute("aria-current", String(a.dataset.section === id)));
+  setCurrent("top");
+
+  if ("IntersectionObserver" in window) {
+    const ratios = new Map();
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((e) => ratios.set(e.target.id, e.intersectionRatio));
+      let best = null, top = 0;
+      ratios.forEach((r, id) => { if (r > top) { top = r; best = id; } });
+      if (best) setCurrent(best);
+    }, { threshold: [0, .2, .5, .8, 1], rootMargin: "-20% 0px -50% 0px" });
+
+    ["top", "research", "news", "publications"].forEach((id) => {
+      const n = $(id);
+      if (n) obs.observe(n);
+    });
+  }
+})();
+</script>
+</body>
+</html>
