@@ -28,7 +28,7 @@ const SITE = {
   affiliation: "PhD Student, Computer Science",
   university:  "North Carolina State University",
   office:      "Raleigh, NC",
-  email:       "leejh2017tob1932@gmail.com",
+  email:       "jlee283@ncsu.edu",
   photo:       "profile.jpg",     // drop the file next to index.html; falls back to initials
   links: {
     "CV":             "cv.pdf",
@@ -40,16 +40,16 @@ const SITE = {
 
 /* Bio. One string per paragraph. Raw HTML is allowed. */
 const BIO = [
-  `I am a PhD student in Computer Science at <a href="https://www.ncsu.edu/">North Carolina State University</a>, advised by Prof. Yuan Liu. My thesis work is on quantum algorithms for continuous-variable / discrete-variable (CV-DV) processors — algorithms written for the native gate set of hybrid hardware from the start, rather than translated onto it after the fact.`,
-  `The through-line in what I work on is the gap between an algorithm on paper and an algorithm that survives contact with a device: how optimization and molecular-simulation problems should be encoded, how classical data enters a quantum state, and how workloads get scheduled once a single chip is no longer enough.`,
-  `Before starting the PhD I spent close to four years as a research data scientist at Cleveland Clinic, building NLP and graph-learning systems for a national cardiac surgery registry, and worked at JPMorgan Chase on agentic LLM workflows for commercial banking. I hold an MS and a BS from Case Western Reserve University, where my master's work on quantum convolutional neural networks was advised by Prof. Shuai Xu.`
+  `I am a PhD student in Computer Science at <a href="https://www.ncsu.edu/">North Carolina State University</a>, advised by <a href="https://ece.ncsu.edu/people/yliu335/">Prof. Yuan Liu</a>. My thesis work is on quantum algorithms for continuous-variable / discrete-variable (CV-DV) quantum processors — algorithms written for the native gate set of hybrid hardware from the start.`,
+  `The through-line in what I work on is the gap between an algorithm on paper and an algorithm that survives contact with a device: how optimization and molecular-simulation problems should be encoded, how classical data enters a quantum state, and how to compile in the CV-DV processors.`,
+  `Before starting the PhD I worked as a research data scientist at Cleveland Clinic, building clinical NLP tools for a national cardiac surgery registry, and worked at JPMorgan Chase on agentic LLM workflows for commercial banking. I hold an MS and a BS from Case Western Reserve University, where my master's work on quantum convolutional neural networks was advised by <a href="https://case.edu/engineering/about/faculty-and-staff-directory/shuai-xu">Prof. Shuai Xu</a>.`
 ];
 
 /* Research threads. */
 const RESEARCH = [
   {
     title: "Quantum algorithms for CV-DV processors",
-    body:  `Hybrid hardware exposes bosonic modes alongside qubits, and the two carry information very differently. I design optimization and molecular-simulation algorithms that map natively onto that structure, with the goal of a real margin over classical methods rather than parity.`
+    body:  `Hybrid hardware exposes bosonic modes alongside qubits, and the two carry information very differently. I design optimization and molecular-simulation algorithms that map natively onto that structure. My goal is to find quantum advantage through these algoritms by leveraging the CV-DV hardware.`
   },
   {
     title: "Compilation and scheduling across modular QPUs",
@@ -58,17 +58,13 @@ const RESEARCH = [
   {
     title: "Quantum machine learning and data embeddings",
     body:  `How classical data enters a quantum state decides the trainability and expressivity of everything downstream. I am interested in embeddings that preserve the structure that matters without spending the entire circuit-depth budget getting the data in.`
-  },
-  {
-    title: "Machine learning for clinical data",
-    body:  `Earlier work, still ongoing through collaborations: language models and knowledge graphs for automated abstraction from cardiac surgery registries, and multimodal representation learning on cardiovascular imaging.`
   }
 ];
 
 /* News. Newest first. First five show; the rest collapse behind a toggle. */
 const NEWS = [
-  { date: "Sep 2026", text: `<b>MOSAIQ</b> submitted to HiPC 2026.` },
   { date: "Aug 2026", text: `Started my PhD in Computer Science at NC State, advised by Prof. Yuan Liu.` },
+  { date: "Sep 2026", text: `<b>MOSAIQ</b>published on Arxiv.`},
   { date: "2026",     text: `<b>InterQ</b> accepted at IEEE QCE 2026.` },
   { date: "2026",     text: `Paper on transpiling OpenQASM 3.0 dynamic circuits to CUDA-Q accepted at QCNC 2026.` },
   { date: "2025",     text: `Co-authored paper on caval translocation published in <i>JTCVS Techniques</i>.` },
@@ -82,14 +78,6 @@ const NEWS = [
    selected: shows under the "Selected" filter
    links:    arxiv / pdf / code / doi / slides / poster / video                   */
 const PUBS = [
-  {
-    title: "MOSAIQ: Modality-Optimized Scheduling Across Interconnected QPUs",
-    authors: ["V. Kulkarni", "J. Lee", "et al."],
-    venue: "Submitted to IEEE International Conference on High Performance Computing, Data, and Analytics (HiPC)",
-    abbr: "HiPC", year: 2026, type: "submitted", selected: true,
-    key: "kulkarni2026mosaiq",
-    links: {}
-  },
   {
     title: "InterQ: Communication-Aware Scheduling Across Modular QPUs with Classical and Quantum Links",
     authors: ["V. Kulkarni", "J. Lee", "et al."],
